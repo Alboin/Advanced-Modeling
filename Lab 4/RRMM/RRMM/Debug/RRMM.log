@@ -1,0 +1,8 @@
+﻿C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V140\Microsoft.CppBuild.targets(392,5): warning MSB8028: The intermediate directory (Debug\) contains files shared from another project (RRMM.vcxproj).  This can lead to incorrect clean and rebuild behavior.
+  main.cpp
+c:\users\albin\documents\github\advanced-modeling\lab 4\rrmm\rrmm\main.cpp(211): warning C4305: '-=': truncation from 'double' to 'float'
+c:\users\albin\documents\github\advanced-modeling\lab 4\rrmm\rrmm\main.cpp(213): warning C4305: '+=': truncation from 'double' to 'float'
+c:\users\albin\documents\github\advanced-modeling\lab 4\rrmm\rrmm\main.cpp(241): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+  MarchingCubes.cpp
+c:\program files (x86)\openmesh 6.3\include\openmesh\core\system\compiler.hh(115): fatal error C1189: #error:  "You have to define _USE_MATH_DEFINES in the compiler settings!"
+  Generating Code...
