@@ -16,7 +16,6 @@
 #include "plyloader.h"
 #include "PLYDrawer.h"
 #include "CubeMap.h"
-#include "taulaMC.hpp"
 #include "MarchingCubes.h"
 
 //using namespace glm;
@@ -24,6 +23,7 @@ using namespace std;
 
 // Global variables for rendering and controls
 glm::mat4 view;
+MarchingCubes* cubesPointer;
 bool leftMousePressed = false;
 bool exitProgram = false;
 double mouseX, mouseY;
@@ -51,7 +51,7 @@ int main()
 	int windowHeight = 800;
 
 	//Starting position of camera
-	view = glm::lookAt(glm::vec3(0.0f, 0.0f, 2.0f), glm::vec3(0, 0, 0), glm::vec3(0, 1, 0));
+	view = glm::lookAt(glm::vec3(0.0f, 0.0f, 1.0f), glm::vec3(0, 0, 0), glm::vec3(0, 1, 0));
 
 	//Initiate glfw
 	glfwInit();
@@ -99,23 +99,22 @@ int main()
 	#pragma endregion
 
 	//Load ply-model
-	PLYModel plymodel("models/bunny.ply", false, false);
+	//PLYModel plymodel("models/bunny.ply", false, false);
 
-	GLuint VBO, VAO, EBO;
-	PLYDrawer mesh(plymodel, VBO, VAO, EBO);
+	//GLuint VBO, VAO, EBO;
+	//PLYDrawer mesh(plymodel, VBO, VAO, EBO);
 
 	//Create cubemap
 	GLuint VBO_map, VAO_map, EBO_map;
 	CubeMap skybox(VBO_map, VAO_map, EBO_map, maxRoughness);
 
 	//Create MarchingCubes
-	MarchingCubes test(shaderProgramID);
-	test.print();
+	cubesPointer = new MarchingCubes("models/Blooby.txt" ,shaderProgramID);
 
-	int dummy;
-	cin >> dummy;
+	//int dummy;
+	//cin >> dummy;
 
-	//vec3 lightPos(0.0f, 15.0f, 10.0f);
+	glm::vec3 lightPos(0.0f, 15.0f, 10.0f);
 
 	while (!glfwWindowShouldClose(window) && !exitProgram)
 	{
@@ -124,19 +123,25 @@ int main()
 		//Update mouse position
 		glfwGetCursorPos(window, &mouseX, &mouseY);
 
+		//Set the lightPos to be the same as the camera position.
+		lightPos = (inverse(view))[3];
+
 		//Rendering commands here
 		glClearColor(0.4f, 0.4f, 0.4f, 1.0f);
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 		glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
 
 		//RENDERING MESH HERE
-		mesh.drawPlyModel(shaderProgramID, skybox.textures[maxRoughness], skybox.textures[roughness + 1]);
-		
+		//mesh.drawPlyModel(shaderProgramID, skybox.textures[maxRoughness], skybox.textures[roughness + 1]);
+		cubesPointer->draw(shaderProgramID);
+
 
 		#pragma region MVP-matrixes for mesh
-		glm::mat4 model = glm::scale(glm::mat4(1.0f), glm::vec3(1/mesh.height, 1/mesh.height, 1/mesh.height));
+		//glm::mat4 model = glm::scale(glm::mat4(1.0f), glm::vec3(1/mesh.height, 1/mesh.height, 1/mesh.height));
 		//Center the model at origo.
-		model = glm::translate(model, glm::vec3(0, -mesh.height/2 - mesh.minPos.y, 0));
+		//model = glm::translate(model, glm::vec3(0, -mesh.height/2 - mesh.minPos.y, 0));
+		glm::mat4 model = glm::mat4(1.0f);
+		model = glm::translate(model, glm::vec3(-0.5f, -0.5f, -0.5f));
 		glm::mat4 projection;
 		projection = glm::perspective(45.0f, (float)windowWidth / (float)windowHeight, 0.1f, 100.0f);
 		glm::vec3 cameraPos = (inverse(view))[3];
@@ -150,8 +155,8 @@ int main()
 		glUniformMatrix4fv(modeltransLoc1, 1, GL_FALSE, glm::value_ptr(model));
 		GLuint projectiontransLoc1 = glGetUniformLocation(shaderProgramID, "projectionMesh");
 		glUniformMatrix4fv(projectiontransLoc1, 1, GL_FALSE, glm::value_ptr(projection));
-		//GLint lightPosLoc1 = glGetUniformLocation(shaderProgramID, "lightPos");
-		//glUniform3f(lightPosLoc1, lightPos.x, lightPos.y, lightPos.z);
+		GLint lightPosLoc1 = glGetUniformLocation(shaderProgramID, "lightPos");
+		glUniform3f(lightPosLoc1, lightPos.x, lightPos.y, lightPos.z);
 		GLint fresnelLoc = glGetUniformLocation(shaderProgramID, "fresnel");
 		glUniform1f(fresnelLoc, fresnel);
 		GLint cameraPosLoc1 = glGetUniformLocation(shaderProgramID, "cameraPos");
@@ -201,7 +206,8 @@ int main()
 	}
 
 	glfwTerminate();
-	plymodel.FreeMemory();
+	//plymodel.FreeMemory();
+	delete cubesPointer;
 
 	return 0;
 }
@@ -219,6 +225,12 @@ void key_callback(GLFWwindow* window, int key, int scancode, int action, int mod
 		fresnel -= 0.05;
 	else if (key == GLFW_KEY_E && action == GLFW_PRESS)
 		fresnel += 0.05;
+
+	// Change the threshold value
+	if (key == GLFW_KEY_UP && action == GLFW_PRESS)
+		cubesPointer->changeThreshold(cubesPointer->currentThreshold + cubesPointer->stepSize);
+	else if (key == GLFW_KEY_DOWN && action == GLFW_PRESS)
+		cubesPointer->changeThreshold(cubesPointer->currentThreshold - cubesPointer->stepSize);
 
 	if (key == GLFW_KEY_ESCAPE && action == GLFW_PRESS)
 		exitProgram = true;

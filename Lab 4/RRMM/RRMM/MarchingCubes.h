@@ -1,9 +1,8 @@
 #include <iostream>
 #include <fstream>
 #include <sstream>
-#include <OpenMesh/Core/Mesh/PolyMesh_ArrayKernelT.hh>
-#include <OpenMesh/Core/Mesh/TriMesh_ArrayKernelT.hh>
-#include <OpenMesh/Core/Utils/Property.hh>
+#include <vector>
+#include <algorithm>
 
 #define GLEW_STATIC
 #include <GL/glew.h>
@@ -12,52 +11,50 @@
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>
 #include <glm/gtc/type_ptr.hpp>
+#include "taulaMC.hpp"
+
 
 using namespace std;
-using namespace OpenMesh;
 
-//typedef OpenMesh::PolyMesh_ArrayKernelT<>  MyMesh;
-
-struct MyTraits : public OpenMesh::DefaultTraits
-{
-	VertexAttributes(OpenMesh::Attributes::Normal);
-	FaceAttributes(OpenMesh::Attributes::Normal);
-
-	//Store previous half-edge
-	//HalfedgeAttributes(OpenMesh::DefaultAttributer::PrevHalfedge);
-
-	/*EdgeTraits
-	{
-		typename Base::Refs::FaceHandle my_face_handle;
-	};*/
-};
-
-typedef OpenMesh::TriMesh_ArrayKernelT<MyTraits> MyMesh;
 
 class MarchingCubes
 {
 public:
-	MarchingCubes(GLuint shaderProgramID);
+	MarchingCubes(string inputFileName, GLuint shaderProgramID);
 
+	void changeThreshold(float newThreshold);
 	void draw(GLuint shaderProgramID);
-	void print();
+
+	pair<float, float> dataMaxMin;
+	float currentThreshold;
+	float stepSize;
 
 private:
 
+	// Rendering variables.
 	GLuint VBO, VAO, EBO;
-	void createBuffers(GLuint shaderProgramID);
+	GLuint shaderID;
+	vector<glm::vec3> vertices;
+	vector<glm::ivec3> indices;
+	vector<glm::vec3> vboArray;
 
-	MyMesh mesh;
-	// Mesh vertices.
-	MyMesh::VertexHandle vhandle[8];
-	// Mesh faces.
-	std::vector<MyMesh::VertexHandle>  face_vhandles;
-
+	// Marching cubes variables.
 	int dimensionSize;
+	float wishedStepSize = 0.01f;
 	vector<float> inputData;
-	pair<float, float> dataMaxMin;
-	double getDataAtPoint(int i, int j, int k);
 
-	MCcases triangleConfig;
+	// Table with triangle lookup.
+	MCcases getTriangleConfig;
+
+	// Functions for creating the marching cubes triangles.
+	void MarchingCubes::createTriangles();
+	double getDataAtPoint(int i, int j, int k);
+	// Creates the vertices for one triangle.
+	vector<glm::vec3> generateVertices(vector<int> edges, int i, int j, int k);
+
+	void createVBOarray();
+	void createBuffers(GLuint shaderProgramID);
+	void computeNormals();
+	void mergeVerticeDuplicates();
 
 };

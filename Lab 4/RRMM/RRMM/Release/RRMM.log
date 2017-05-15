@@ -1,10 +1,41 @@
 ﻿C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V140\Microsoft.CppBuild.targets(392,5): warning MSB8028: The intermediate directory (Release\) contains files shared from another project (FRR.vcxproj, RRMM.vcxproj).  This can lead to incorrect clean and rebuild behavior.
+  MarchingCubes.cpp
+MarchingCubes.cpp(18): warning C4244: 'argument': conversion from 'double' to 'unsigned int', possible loss of data
+MarchingCubes.cpp(74): warning C4244: '+=': conversion from 'double' to 'int', possible loss of data
+MarchingCubes.cpp(76): warning C4244: '+=': conversion from 'double' to 'int', possible loss of data
+MarchingCubes.cpp(78): warning C4244: '+=': conversion from 'double' to 'int', possible loss of data
+MarchingCubes.cpp(80): warning C4244: '+=': conversion from 'double' to 'int', possible loss of data
+MarchingCubes.cpp(83): warning C4244: '+=': conversion from 'double' to 'int', possible loss of data
+MarchingCubes.cpp(85): warning C4244: '+=': conversion from 'double' to 'int', possible loss of data
+MarchingCubes.cpp(87): warning C4244: '+=': conversion from 'double' to 'int', possible loss of data
+MarchingCubes.cpp(89): warning C4244: '+=': conversion from 'double' to 'int', possible loss of data
+MarchingCubes.cpp(103): warning C4018: '<': signed/unsigned mismatch
+MarchingCubes.cpp(151): warning C4244: '+=': conversion from 'double' to 'float', possible loss of data
+MarchingCubes.cpp(157): warning C4244: '+=': conversion from 'double' to 'float', possible loss of data
+MarchingCubes.cpp(164): warning C4244: '+=': conversion from 'double' to 'float', possible loss of data
+MarchingCubes.cpp(171): warning C4244: '+=': conversion from 'double' to 'float', possible loss of data
+MarchingCubes.cpp(177): warning C4244: '+=': conversion from 'double' to 'float', possible loss of data
+MarchingCubes.cpp(184): warning C4244: '+=': conversion from 'double' to 'float', possible loss of data
+MarchingCubes.cpp(192): warning C4244: '+=': conversion from 'double' to 'float', possible loss of data
+MarchingCubes.cpp(200): warning C4244: '+=': conversion from 'double' to 'float', possible loss of data
+MarchingCubes.cpp(207): warning C4244: '+=': conversion from 'double' to 'float', possible loss of data
+MarchingCubes.cpp(214): warning C4244: '+=': conversion from 'double' to 'float', possible loss of data
+MarchingCubes.cpp(222): warning C4244: '+=': conversion from 'double' to 'float', possible loss of data
+MarchingCubes.cpp(228): warning C4244: '+=': conversion from 'double' to 'float', possible loss of data
+MarchingCubes.cpp(245): warning C4244: 'argument': conversion from 'double' to 'unsigned int', possible loss of data
+MarchingCubes.cpp(251): warning C4018: '<': signed/unsigned mismatch
+MarchingCubes.cpp(267): warning C4018: '<': signed/unsigned mismatch
+MarchingCubes.cpp(276): warning C4018: '<': signed/unsigned mismatch
+  main.cpp
+main.cpp(225): warning C4305: '-=': truncation from 'double' to 'float'
+main.cpp(227): warning C4305: '+=': truncation from 'double' to 'float'
+main.cpp(261): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
 LINK : warning LNK4098: defaultlib 'LIBCMT' conflicts with use of other libs; use /NODEFAULTLIB:library
 LINK : warning LNK4098: defaultlib 'MSVCRTD' conflicts with use of other libs; use /NODEFAULTLIB:library
   Generating code
-  4 of 2889 functions ( 0.1%) were compiled, the rest were copied from previous compilation.
+  1 of 1081 functions ( 0.1%) were compiled, the rest were copied from previous compilation.
     0 functions were new in current compilation
-    41 functions had inline decision re-evaluated but remain unchanged
+    29 functions had inline decision re-evaluated but remain unchanged
   Finished generating code
 shaderLoader.obj : warning LNK4049: locally defined symbol ___glewLinkProgram imported
 shaderLoader.obj : warning LNK4049: locally defined symbol ___glewDeleteShader imported
