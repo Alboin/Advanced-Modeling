@@ -3,6 +3,9 @@
 #include <sstream>
 #include <vector>
 #include <algorithm>
+#include <map>
+#include <set>
+#include <unordered_map>
 
 #define GLEW_STATIC
 #include <GL/glew.h>
@@ -23,11 +26,12 @@ public:
 	MarchingCubes(string inputFileName, GLuint shaderProgramID);
 
 	void changeThreshold(float newThreshold);
-	void draw(GLuint shaderProgramID);
+	void draw(GLuint shaderProgramID, GLuint diffuseTexID, GLuint specularTexID);
 
 	pair<float, float> dataMaxMin;
 	float currentThreshold;
 	float stepSize;
+	int dimensionSize;
 
 private:
 
@@ -37,11 +41,12 @@ private:
 	vector<glm::vec3> vertices;
 	vector<glm::ivec3> indices;
 	vector<glm::vec3> vboArray;
+	vector<set<int>> verticeNeighbours; //this one is computed in "computeNumberOfShells()-function"
 
 	// Marching cubes variables.
-	int dimensionSize;
 	float wishedStepSize = 0.01f;
 	vector<float> inputData;
+	int nShells;
 
 	// Table with triangle lookup.
 	MCcases getTriangleConfig;
@@ -51,10 +56,17 @@ private:
 	double getDataAtPoint(int i, int j, int k);
 	// Creates the vertices for one triangle.
 	vector<glm::vec3> generateVertices(vector<int> edges, int i, int j, int k);
+	void createTriangles(vector<int> edges, int i, int j, int k);
+
+	unordered_map<long long int, int> verticePointers;
+	long long int hash(int i, int j, int k, int e);
+
 
 	void createVBOarray();
 	void createBuffers(GLuint shaderProgramID);
 	void computeNormals();
 	void mergeVerticeDuplicates();
+	long long int hashFunction(const glm::vec3 &vertex) const;
+	int computeNumberOfShells();
 
 };

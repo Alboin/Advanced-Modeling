@@ -27,9 +27,11 @@ MarchingCubes* cubesPointer;
 bool leftMousePressed = false;
 bool exitProgram = false;
 double mouseX, mouseY;
+int wireframe = 0;
 int roughness = 0;
 int maxRoughness = 6;
 float fresnel = 0.4f;
+bool renderBRDF = false;
 
 // Global variables for the fps-counter
 double t0 = 0.0;
@@ -60,9 +62,8 @@ int main()
 	glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
 	glfwWindowHint(GLFW_RESIZABLE, GL_FALSE);
 
-
 	//Try to create a window
-	GLFWwindow* window = glfwCreateWindow(windowWidth, windowHeight, "RRMM", nullptr, nullptr);
+	GLFWwindow* window = glfwCreateWindow(windowWidth, windowHeight, "AM", nullptr, nullptr);
 	if (window == nullptr)
 	{
 		std::cout << "Failed to create GLFW window" << std::endl;
@@ -98,11 +99,6 @@ int main()
 	glfwSetScrollCallback(window, scroll_callback);
 	#pragma endregion
 
-	//Load ply-model
-	//PLYModel plymodel("models/bunny.ply", false, false);
-
-	//GLuint VBO, VAO, EBO;
-	//PLYDrawer mesh(plymodel, VBO, VAO, EBO);
 
 	//Create cubemap
 	GLuint VBO_map, VAO_map, EBO_map;
@@ -111,10 +107,7 @@ int main()
 	//Create MarchingCubes
 	cubesPointer = new MarchingCubes("models/Blooby.txt" ,shaderProgramID);
 
-	//int dummy;
-	//cin >> dummy;
-
-	glm::vec3 lightPos(0.0f, 15.0f, 10.0f);
+	glm::vec3 lightPos;
 
 	while (!glfwWindowShouldClose(window) && !exitProgram)
 	{
@@ -129,11 +122,18 @@ int main()
 		//Rendering commands here
 		glClearColor(0.4f, 0.4f, 0.4f, 1.0f);
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-		glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
+		glPointSize(5);
+
+
+		if (wireframe == 1)
+			glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
+		else if(wireframe == 2)
+			glPolygonMode(GL_FRONT_AND_BACK, GL_POINT);
+		else
+			glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
 
 		//RENDERING MESH HERE
-		//mesh.drawPlyModel(shaderProgramID, skybox.textures[maxRoughness], skybox.textures[roughness + 1]);
-		cubesPointer->draw(shaderProgramID);
+		cubesPointer->draw(shaderProgramID, skybox.textures[maxRoughness], skybox.textures[roughness + 1]);
 
 
 		#pragma region MVP-matrixes for mesh
@@ -141,7 +141,9 @@ int main()
 		//Center the model at origo.
 		//model = glm::translate(model, glm::vec3(0, -mesh.height/2 - mesh.minPos.y, 0));
 		glm::mat4 model = glm::mat4(1.0f);
-		model = glm::translate(model, glm::vec3(-0.5f, -0.5f, -0.5f));
+		model = glm::scale(model, glm::vec3(1.0f / float(cubesPointer->dimensionSize)));
+		//glm::mat4 model = glm::mat4((1.0f / float(cubesPointer->dimensionSize)));
+		model = glm::translate(model, glm::vec3(float(cubesPointer->dimensionSize) / -2.0f));
 		glm::mat4 projection;
 		projection = glm::perspective(45.0f, (float)windowWidth / (float)windowHeight, 0.1f, 100.0f);
 		glm::vec3 cameraPos = (inverse(view))[3];
@@ -161,7 +163,12 @@ int main()
 		glUniform1f(fresnelLoc, fresnel);
 		GLint cameraPosLoc1 = glGetUniformLocation(shaderProgramID, "cameraPos");
 		glUniform3f(cameraPosLoc1, cameraPos.x, cameraPos.y, cameraPos.z);
+		GLint brdfLoc = glGetUniformLocation(shaderProgramID, "BRDF");
+		glUniform1i(brdfLoc, renderBRDF);
 		#pragma endregion
+
+		glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
+
 
 		//RENDERING SKYBOX HERE
 		skybox.drawCubeMap(skyboxShaderID);
@@ -195,7 +202,7 @@ int main()
 		if ((t - t0) > 1.0 || frames == 0)
 		{
 			double fps = (double)frames / (t - t0);
-			sprintf(titlestring, "RRMM (%.1f fps)", fps);
+			sprintf(titlestring, "AM (%.1f fps)", fps);
 			glfwSetWindowTitle(window, titlestring);
 			t0 = t;
 			frames = 0;
@@ -221,16 +228,46 @@ void key_callback(GLFWwindow* window, int key, int scancode, int action, int mod
 		roughness--;
 
 	//By pressing W/E the user can decrease/increase the fresnel constant
-	if (key == GLFW_KEY_W && action == GLFW_PRESS)
+	if (key == GLFW_KEY_W)
 		fresnel -= 0.05;
-	else if (key == GLFW_KEY_E && action == GLFW_PRESS)
+	else if (key == GLFW_KEY_E)
 		fresnel += 0.05;
+
+	if (key == GLFW_KEY_SPACE && action == GLFW_PRESS)
+	{
+		wireframe++;
+		if (wireframe > 2)
+			wireframe = 0;
+	}
+
+	if (key == GLFW_KEY_ENTER && action == GLFW_PRESS)
+	{
+		if (renderBRDF)
+			renderBRDF = false;
+		else
+			renderBRDF = true;
+	}
 
 	// Change the threshold value
 	if (key == GLFW_KEY_UP && action == GLFW_PRESS)
 		cubesPointer->changeThreshold(cubesPointer->currentThreshold + cubesPointer->stepSize);
 	else if (key == GLFW_KEY_DOWN && action == GLFW_PRESS)
 		cubesPointer->changeThreshold(cubesPointer->currentThreshold - cubesPointer->stepSize);
+
+	// Change the step-size of threshold value
+	if (key == GLFW_KEY_LEFT && action == GLFW_PRESS)
+	{
+		cout << "Stepsize changed from " << cubesPointer->stepSize;
+		cubesPointer->stepSize *= 0.9f;
+		cout << " to " << cubesPointer->stepSize << endl;
+	}
+	else if (key == GLFW_KEY_RIGHT && action == GLFW_PRESS)
+	{
+		cout << "Stepsize changed from " << cubesPointer->stepSize;
+		cubesPointer->stepSize *= 1.1f;
+		cout << " to " << cubesPointer->stepSize << endl;
+	}
+
 
 	if (key == GLFW_KEY_ESCAPE && action == GLFW_PRESS)
 		exitProgram = true;
