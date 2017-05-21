@@ -13,8 +13,6 @@
 #include <math.h>
 
 #include "shaderLoader.h"
-#include "plyloader.h"
-#include "PLYDrawer.h"
 #include "CubeMap.h"
 #include "MarchingCubes.h"
 
@@ -32,6 +30,13 @@ int roughness = 0;
 int maxRoughness = 6;
 float fresnel = 0.4f;
 bool renderBRDF = false;
+
+// Global variables for animation input
+double startThreshold;
+double endThreshold;
+int numberOfFrames;
+int currentFrame = 0;
+bool animateCubes = false;
 
 // Global variables for the fps-counter
 double t0 = 0.0;
@@ -104,8 +109,17 @@ int main()
 	GLuint VBO_map, VAO_map, EBO_map;
 	CubeMap skybox(VBO_map, VAO_map, EBO_map, maxRoughness);
 
+	string path = "models/";
+	cout << "Enter name of file (e.g. 'Blooby.txt'): ";
+	string input;
+	cin >> input;
+	path.append(input);
+
+	//Debugging
+	//path = "models/Blooby.txt";
+
 	//Create MarchingCubes
-	cubesPointer = new MarchingCubes("models/Blooby.txt" ,shaderProgramID);
+	cubesPointer = new MarchingCubes(path ,shaderProgramID);
 
 	glm::vec3 lightPos;
 
@@ -131,6 +145,15 @@ int main()
 			glPolygonMode(GL_FRONT_AND_BACK, GL_POINT);
 		else
 			glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
+
+		if (animateCubes)
+		{
+			cubesPointer->changeThreshold(startThreshold + (endThreshold - startThreshold) * ((float)currentFrame/(float)numberOfFrames));
+			if (currentFrame == numberOfFrames)
+				animateCubes = false;
+			currentFrame++;
+			cout << "Interpolating, frame: " << currentFrame << "/" << numberOfFrames << endl;
+		}
 
 		//RENDERING MESH HERE
 		cubesPointer->draw(shaderProgramID, skybox.textures[maxRoughness], skybox.textures[roughness + 1]);
@@ -266,6 +289,19 @@ void key_callback(GLFWwindow* window, int key, int scancode, int action, int mod
 		cout << "Stepsize changed from " << cubesPointer->stepSize;
 		cubesPointer->stepSize *= 1.1f;
 		cout << " to " << cubesPointer->stepSize << endl;
+	}
+
+	if (key == GLFW_KEY_A && action == GLFW_PRESS)
+	{
+		cout << endl << "Smallest data-value: " << cubesPointer->dataMaxMin.second << ", and largest: " << cubesPointer->dataMaxMin.first;
+		cout << endl << "Enter starting threshold: ";
+		cin >> startThreshold;
+		cout << "Enter ending threshold: ";
+		cin >> endThreshold;
+		cout << "Number of frames to interpolate over: ";
+		cin >> numberOfFrames;
+		animateCubes = true;
+		currentFrame = 0;
 	}
 
 

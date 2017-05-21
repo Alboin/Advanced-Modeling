@@ -1,0 +1,14 @@
+To run the application, run RRMM/Release/AM.exe
+
+You will be asked to enter a filename at start, e.x. "Blooby.txt". All the files available is in "/models" next to "AM.exe", more files can be added there if wanted.
+
+To interpolate between to threshold values, press "A" when the rendering-window is active. You will then be asked in the console to enter a starting and ending threshold and also the number of frames to interpolate over.
+
+The threshold can be manually increased/decreased with the up/down arrows on the keyboard.
+
+The threshold step-size can be increased/decreased with the left/right arrows on the keyboard.
+
+The spacebar can be used to toggle between triangle/line/point-rendering.
+
+To swith between using BRDF or simple shading, press Enter.
+When BRDF is active, W/E can be used to decrease/increase the fresenel constant and S/D to swith to more specular/diffuse reflection maps.

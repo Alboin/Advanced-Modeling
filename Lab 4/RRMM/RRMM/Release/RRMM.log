@@ -1,61 +1,15 @@
 ﻿C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V140\Microsoft.CppBuild.targets(392,5): warning MSB8028: The intermediate directory (Release\) contains files shared from another project (FRR.vcxproj, RRMM.vcxproj).  This can lead to incorrect clean and rebuild behavior.
-  MarchingCubes.cpp
-MarchingCubes.cpp(18): warning C4244: 'argument': conversion from 'double' to 'unsigned int', possible loss of data
-MarchingCubes.cpp(64): warning C4244: '+=': conversion from 'double' to 'int', possible loss of data
-MarchingCubes.cpp(66): warning C4244: '+=': conversion from 'double' to 'int', possible loss of data
-MarchingCubes.cpp(68): warning C4244: '+=': conversion from 'double' to 'int', possible loss of data
-MarchingCubes.cpp(70): warning C4244: '+=': conversion from 'double' to 'int', possible loss of data
-MarchingCubes.cpp(73): warning C4244: '+=': conversion from 'double' to 'int', possible loss of data
-MarchingCubes.cpp(75): warning C4244: '+=': conversion from 'double' to 'int', possible loss of data
-MarchingCubes.cpp(77): warning C4244: '+=': conversion from 'double' to 'int', possible loss of data
-MarchingCubes.cpp(79): warning C4244: '+=': conversion from 'double' to 'int', possible loss of data
-MarchingCubes.cpp(87): warning C4018: '<': signed/unsigned mismatch
-MarchingCubes.cpp(292): warning C4244: 'initializing': conversion from 'int' to 'float', possible loss of data
-MarchingCubes.cpp(293): warning C4244: 'initializing': conversion from 'int' to 'float', possible loss of data
-MarchingCubes.cpp(294): warning C4244: 'initializing': conversion from 'int' to 'float', possible loss of data
-MarchingCubes.cpp(301): warning C4244: '+=': conversion from 'double' to 'float', possible loss of data
-MarchingCubes.cpp(307): warning C4244: '+=': conversion from 'double' to 'float', possible loss of data
-MarchingCubes.cpp(314): warning C4244: '+=': conversion from 'double' to 'float', possible loss of data
-MarchingCubes.cpp(321): warning C4244: '+=': conversion from 'double' to 'float', possible loss of data
-MarchingCubes.cpp(327): warning C4244: '+=': conversion from 'double' to 'float', possible loss of data
-MarchingCubes.cpp(334): warning C4244: '+=': conversion from 'double' to 'float', possible loss of data
-MarchingCubes.cpp(342): warning C4244: '+=': conversion from 'double' to 'float', possible loss of data
-MarchingCubes.cpp(350): warning C4244: '+=': conversion from 'double' to 'float', possible loss of data
-MarchingCubes.cpp(357): warning C4244: '+=': conversion from 'double' to 'float', possible loss of data
-MarchingCubes.cpp(364): warning C4244: '+=': conversion from 'double' to 'float', possible loss of data
-MarchingCubes.cpp(372): warning C4244: '+=': conversion from 'double' to 'float', possible loss of data
-MarchingCubes.cpp(378): warning C4244: '+=': conversion from 'double' to 'float', possible loss of data
-MarchingCubes.cpp(429): warning C4244: '+=': conversion from 'double' to 'float', possible loss of data
-MarchingCubes.cpp(435): warning C4244: '+=': conversion from 'double' to 'float', possible loss of data
-MarchingCubes.cpp(442): warning C4244: '+=': conversion from 'double' to 'float', possible loss of data
-MarchingCubes.cpp(449): warning C4244: '+=': conversion from 'double' to 'float', possible loss of data
-MarchingCubes.cpp(455): warning C4244: '+=': conversion from 'double' to 'float', possible loss of data
-MarchingCubes.cpp(462): warning C4244: '+=': conversion from 'double' to 'float', possible loss of data
-MarchingCubes.cpp(470): warning C4244: '+=': conversion from 'double' to 'float', possible loss of data
-MarchingCubes.cpp(478): warning C4244: '+=': conversion from 'double' to 'float', possible loss of data
-MarchingCubes.cpp(485): warning C4244: '+=': conversion from 'double' to 'float', possible loss of data
-MarchingCubes.cpp(492): warning C4244: '+=': conversion from 'double' to 'float', possible loss of data
-MarchingCubes.cpp(500): warning C4244: '+=': conversion from 'double' to 'float', possible loss of data
-MarchingCubes.cpp(506): warning C4244: '+=': conversion from 'double' to 'float', possible loss of data
-MarchingCubes.cpp(523): warning C4244: 'argument': conversion from 'double' to 'unsigned int', possible loss of data
-MarchingCubes.cpp(529): warning C4018: '<': signed/unsigned mismatch
-MarchingCubes.cpp(545): warning C4018: '<': signed/unsigned mismatch
-MarchingCubes.cpp(554): warning C4018: '<': signed/unsigned mismatch
-MarchingCubes.cpp(603): warning C4018: '<': signed/unsigned mismatch
-MarchingCubes.cpp(621): warning C4018: '<': signed/unsigned mismatch
-MarchingCubes.cpp(653): warning C4018: '<': signed/unsigned mismatch
-MarchingCubes.cpp(666): warning C4244: 'initializing': conversion from 'float' to '__int64', possible loss of data
-MarchingCubes.cpp(667): warning C4244: 'initializing': conversion from 'float' to '__int64', possible loss of data
-MarchingCubes.cpp(668): warning C4244: 'initializing': conversion from 'float' to '__int64', possible loss of data
-MarchingCubes.cpp(681): warning C4018: '<': signed/unsigned mismatch
-MarchingCubes.cpp(691): warning C4018: '<': signed/unsigned mismatch
-MarchingCubes.cpp(715): warning C4018: '<': signed/unsigned mismatch
+  main.cpp
+main.cpp(151): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+main.cpp(255): warning C4305: '-=': truncation from 'double' to 'float'
+main.cpp(257): warning C4305: '+=': truncation from 'double' to 'float'
+main.cpp(334): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
 LINK : warning LNK4098: defaultlib 'LIBCMT' conflicts with use of other libs; use /NODEFAULTLIB:library
 LINK : warning LNK4098: defaultlib 'MSVCRTD' conflicts with use of other libs; use /NODEFAULTLIB:library
   Generating code
-  3 of 1439 functions ( 0.2%) were compiled, the rest were copied from previous compilation.
-    1 functions were new in current compilation
-    13 functions had inline decision re-evaluated but remain unchanged
+  29 of 1697 functions ( 1.7%) were compiled, the rest were copied from previous compilation.
+    3 functions were new in current compilation
+    33 functions had inline decision re-evaluated but remain unchanged
   Finished generating code
 shaderLoader.obj : warning LNK4049: locally defined symbol ___glewLinkProgram imported
 shaderLoader.obj : warning LNK4049: locally defined symbol ___glewDeleteShader imported

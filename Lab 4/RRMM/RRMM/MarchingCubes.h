@@ -40,6 +40,7 @@ private:
 	GLuint shaderID;
 	vector<glm::vec3> vertices;
 	vector<glm::ivec3> indices;
+	set<pair<int, int>> edges;
 	vector<glm::vec3> vboArray;
 	vector<set<int>> verticeNeighbours; //this one is computed in "computeNumberOfShells()-function"
 
@@ -47,26 +48,23 @@ private:
 	float wishedStepSize = 0.01f;
 	vector<float> inputData;
 	int nShells;
+	unordered_map<long long int, int> verticePointers; //An unordered map containing all created vertices and their hash-value.
 
 	// Table with triangle lookup.
 	MCcases getTriangleConfig;
 
 	// Functions for creating the marching cubes triangles.
-	void MarchingCubes::createTriangles();
-	double getDataAtPoint(int i, int j, int k);
-	// Creates the vertices for one triangle.
-	vector<glm::vec3> generateVertices(vector<int> edges, int i, int j, int k);
+	void createTriangles();
+	// Creates the vertices for one triangle (or links to previously created vertices).
 	void createTriangles(vector<int> edges, int i, int j, int k);
+	double getDataAtPoint(int i, int j, int k);
 
-	unordered_map<long long int, int> verticePointers;
 	long long int hash(int i, int j, int k, int e);
-
 
 	void createVBOarray();
 	void createBuffers(GLuint shaderProgramID);
 	void computeNormals();
-	void mergeVerticeDuplicates();
-	long long int hashFunction(const glm::vec3 &vertex) const;
-	int computeNumberOfShells();
+	void computeEdges();
+	void computeNumberOfShells();
 
 };

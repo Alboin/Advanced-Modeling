@@ -127,15 +127,11 @@
     <ClCompile Include="CubeMap.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="MarchingCubes.cpp" />
-    <ClCompile Include="PLYDrawer.cpp" />
-    <ClCompile Include="plyloader.cpp" />
     <ClCompile Include="shaderLoader.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CubeMap.h" />
     <ClInclude Include="MarchingCubes.h" />
-    <ClInclude Include="PLYDrawer.h" />
-    <ClInclude Include="plyloader.h" />
     <ClInclude Include="shaderLoader.h" />
     <ClInclude Include="taulaMC.hpp" />
   </ItemGroup>

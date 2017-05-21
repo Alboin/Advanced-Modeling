@@ -85,17 +85,8 @@ void MarchingCubes::createTriangles()
 
 				// Add vertices at the necessary edges, at the correct positions.
 				for (int a = 0; a < triangles.size(); a++)
-				{
 					createTriangles(triangles[a], i, j, k);
-					/*vector<glm::vec3> temp = generateVertices(triangles[a], i, j, k);
 
-					int index = vertices.size();
-					indices.push_back(glm::ivec3(index, index + 1, index + 2));
-
-					vertices.push_back(temp[0]);
-					vertices.push_back(temp[1]);
-					vertices.push_back(temp[2]);*/
-				}
 			}
 		}
 	}
@@ -380,6 +371,9 @@ void MarchingCubes::createTriangles(vector<int> edges, int i, int j, int k)
 			}
 			#pragma endregion
 
+			if (xPos < 5 || yPos < 5 || zPos < 5)
+				cout << "AJABAJA!!" << endl;
+
 			// Add the vertice.
 			vertices.push_back(glm::vec3(xPos, yPos, zPos));
 			// Add its index to the hash-table.
@@ -389,6 +383,11 @@ void MarchingCubes::createTriangles(vector<int> edges, int i, int j, int k)
 
 		}
 	}
+
+	//Debugging
+	for (int h = 0; h < 3; h++)
+		if (triangleIndexes[h] < 0)
+			cout << "ERROR: Wrong index!!!" << endl;
 
 	// Add the finished triangle to the indices.
 	indices.push_back(glm::ivec3(triangleIndexes[0], triangleIndexes[1], triangleIndexes[2]));
@@ -401,117 +400,6 @@ long long int MarchingCubes::hash(int i, int j, int k, int e)
 	long long int number = (i * 1000000) + (j * 10000) + (k * 100) + e;
 	return number;
 }
-
-
-vector<glm::vec3> MarchingCubes::generateVertices(vector<int> edges, int i, int j, int k)
-{
-
-	vector<glm::vec3> resultingVertices;
-
-	// Create the vertices for one triangle.
-	for (int a = 0; a < 3; a++)
-	{
-		double point1, point2;
-		float xPos = float(i) / float(dimensionSize);
-		float yPos = float(j) / float(dimensionSize);
-		float zPos = float(k) / float(dimensionSize);
-
-
-		if (edges[a] == 0) // Edge 0
-		{
-			point1 = getDataAtPoint(i, j, k);
-			point2 = getDataAtPoint(i, j, k + 1);
-			zPos += (currentThreshold - point1) /  (point2 - point1) * (1.0f / float(dimensionSize));
-		}
-		else if (edges[a] == 1) // Edge 1
-		{
-			point1 = getDataAtPoint(i, j, k + 1);
-			point2 = getDataAtPoint(i + 1, j, k + 1);
-			xPos += (currentThreshold - point1) / (point2 - point1) * (1.0f / float(dimensionSize));
-			zPos += 1.0f / float(dimensionSize);
-		}
-		else if (edges[a] == 2) // Edge 2
-		{
-			point1 = getDataAtPoint(i + 1, j, k);
-			point2 = getDataAtPoint(i + 1, j, k + 1);
-			zPos += (currentThreshold - point1) / (point2 - point1) * (1.0f / float(dimensionSize));
-			xPos += 1.0f / float(dimensionSize);
-		}
-		else if (edges[a] == 3) // Edge 3
-		{
-			point1 = getDataAtPoint(i, j, k);
-			point2 = getDataAtPoint(i + 1, j, k);
-			xPos += (currentThreshold - point1) / (point2 - point1) * (1.0f / float(dimensionSize));
-		}
-		else if (edges[a] == 4) // Edge 4
-		{
-			point1 = getDataAtPoint(i, j + 1, k);
-			point2 = getDataAtPoint(i, j + 1, k + 1);
-			zPos += (currentThreshold - point1) / (point2 - point1) * (1.0f / float(dimensionSize));
-			yPos += 1.0f / float(dimensionSize);
-		}
-		else if (edges[a] == 5) // Edge 5
-		{
-			point1 = getDataAtPoint(i, j + 1, k + 1);
-			point2 = getDataAtPoint(i + 1, j + 1, k + 1);
-			xPos += (currentThreshold - point1) / (point2 - point1) * (1.0f / float(dimensionSize));
-			yPos += 1.0f / float(dimensionSize);
-			zPos += 1.0f / float(dimensionSize);
-		}
-		else if (edges[a] == 6) // Edge 6
-		{
-			point1 = getDataAtPoint(i + 1, j + 1, k);
-			point2 = getDataAtPoint(i + 1, j + 1, k + 1);
-			zPos += (currentThreshold - point1) / (point2 - point1) * (1.0f / float(dimensionSize));
-			yPos += 1.0f / float(dimensionSize);
-			xPos += 1.0f / float(dimensionSize);
-		}
-		else if (edges[a] == 7) // Edge 7
-		{
-			point1 = getDataAtPoint(i, j + 1, k);
-			point2 = getDataAtPoint(i + 1, j + 1, k);
-			xPos += (currentThreshold - point1) / (point2 - point1) * (1.0f / float(dimensionSize));
-			yPos += 1.0f / float(dimensionSize);
-		}
-		else if (edges[a] == 8) // Edge 8
-		{
-			point1 = getDataAtPoint(i, j, k + 1);
-			point2 = getDataAtPoint(i, j + 1, k + 1);
-			yPos += (currentThreshold - point1) / (point2 - point1) * (1.0f / float(dimensionSize));
-			zPos += 1.0f / float(dimensionSize);
-		}
-		else if (edges[a] == 9) // Edge 9
-		{
-			point1 = getDataAtPoint(i + 1, j, k + 1);
-			point2 = getDataAtPoint(i + 1, j + 1, k + 1);
-			yPos += (currentThreshold - point1) / (point2 - point1) * (1.0f / float(dimensionSize));
-			xPos += 1.0f / float(dimensionSize);
-			zPos += 1.0f / float(dimensionSize);
-		}
-		else if (edges[a] == 10) // Edge 10
-		{
-			point1 = getDataAtPoint(i, j, k);
-			point2 = getDataAtPoint(i, j + 1, k);
-			yPos += (currentThreshold - point1) / (point2 - point1) * (1.0f / float(dimensionSize));
-		}
-		else if (edges[a] == 11) // Edge 11
-		{
-			point1 = getDataAtPoint(i + 1, j, k);
-			point2 = getDataAtPoint(i + 1, j + 1, k);
-			yPos += (currentThreshold - point1) / (point2 - point1) * (1.0f / float(dimensionSize));
-			xPos += 1.0f / float(dimensionSize);
-		}
-		else
-		{
-			cout << "ERROR: Wrong edge input!" << endl;
-		}
-
-		resultingVertices.push_back(glm::vec3(xPos, yPos, zPos));
-	}
-	
-	return resultingVertices;
-}
-
 
 double MarchingCubes::getDataAtPoint(int i, int j, int k)
 {
@@ -576,6 +464,7 @@ void MarchingCubes::changeThreshold(float newThreshold)
 	vboArray.clear();
 	verticePointers.clear();
 	verticeNeighbours.clear();
+	edges.clear();
 
 	// Create new vertices with modified threshold.
 	currentThreshold = newThreshold;
@@ -583,94 +472,32 @@ void MarchingCubes::changeThreshold(float newThreshold)
 
 	//mergeVerticeDuplicates();
 	createVBOarray();
-	//computeNumberOfShells();
+	computeNumberOfShells();
 	computeNormals(); 
+	computeEdges();
 	createBuffers(shaderID);
 
-	cout << "Threshold: " << currentThreshold << ", vertices: " << vertices.size()  << ", faces: " << indices.size() << endl;
-}
+	cout << endl <<"Threshold: " << currentThreshold << endl;
 
-void MarchingCubes::mergeVerticeDuplicates()
-{
-	map<long long, vector<int>> closeVertices;
+	int genus = 0;
+	genus += vertices.size();
+	genus += indices.size();
+	genus -= edges.size();
+	genus /= 2;
+	genus = -genus;
+	genus += nShells;
 
-	// Add all the vertex's indices to our map.
 	for (int i = 0; i < vertices.size(); i++)
-	{
-		long long int vertexHash = hashFunction(vertices[i]);
-
-		closeVertices[vertexHash].push_back(i);
-
-	}
-
-	vector<bool> removed;
-	removed.resize(vertices.size(), false);
-
-	int numberOfVerticesToRemove = 0;
-
-	// Change the indices for close vertices.
-	for (map<long long int, vector<int>>::iterator it = closeVertices.begin(); it != closeVertices.end(); it++)
-	{
-		// Replace all vertices with the first vertex in the list.
-		int firstIndex = it->second[0];
-		for (int i = 1; i < it->second.size(); i++)
-		{
-			if (indices[it->second[i] / 3].x == it->second[i])
-				indices[it->second[i] / 3].x = firstIndex;
-			else if (indices[it->second[i] / 3].y == it->second[i])
-				indices[it->second[i] / 3].y = firstIndex;
-			else if (indices[it->second[i] / 3].z == it->second[i])
-				indices[it->second[i] / 3].z = firstIndex;
-			else
-				cout << "Somethings is not right..." << endl;
-
-			removed[it->second[i]] = true;
-		}
-		numberOfVerticesToRemove += it->second.size() - 1;
-	}
+		if (glm::distance(vertices[i], glm::vec3(0, 0, 0)) < 5)
+			cout << "AJAJ!" << endl;
 
 
-	// Remove unused vertices and calculate how this will affect the indices.
-	int decreasedIndex = 0;
-	vector<int> decreaseIndexBy;
-	decreaseIndexBy.resize(vertices.size());
-	for (int i = vertices.size() - 1; i >= 0; i--)
-	{
-		if (removed[i])
-		{
-			vertices.erase(vertices.begin() + i);
-			decreasedIndex++;
-		}
-		decreaseIndexBy[i] = numberOfVerticesToRemove - decreasedIndex;
-	}
-
-	// Update the indices according to shortening of the vertex-vector.
-	for (int i = 0; i < indices.size(); i++)
-	{
-		indices[i].x -= decreaseIndexBy[indices[i].x];
-		indices[i].y -= decreaseIndexBy[indices[i].y];
-		indices[i].z -= decreaseIndexBy[indices[i].z];
-	}
-
+	//int genus = ((vertices.size() + indices.size() - edges.size())) * 0.5f;
+	cout << "V: " << vertices.size() << ", F: " << indices.size() << ", E: " << edges.size() << ", S: " << nShells << ", H: " << genus << endl;
 }
 
-long long int MarchingCubes::hashFunction(const glm::vec3 &vertex) const 
+void MarchingCubes::computeNumberOfShells()
 {
-	long long int precision = 100000000;
-	//Give the vertex x,y,z values between 0 and dimensionSize * precision.
-	long long int x = (vertex.x  * precision);
-	long long int y = (vertex.y  * precision);
-	long long int z = (vertex.z  * precision);
-
-	// Works as long as the dimensionSize is smaller than 1000.
-	long long int hashValue = x * precision * 10000 + y * precision * 100 + z;
-	
-	return hashValue;
-}
-
-int MarchingCubes::computeNumberOfShells()
-{
-	return -1;
 	// Compute each vertex neighbouring vertices.
 	verticeNeighbours.resize(vertices.size());
 	for (int i = 0; i < indices.size(); i++)
@@ -683,26 +510,18 @@ int MarchingCubes::computeNumberOfShells()
 		verticeNeighbours[indices[i].z].insert(indices[i].x);
 	}
 
+	//Debugging
+	/*float averageConnectivity = 0;
 	for (int i = 0; i < vertices.size(); i++)
 	{
-		if (verticeNeighbours[i].size() > 40)
-			cout << "ojdå: " << verticeNeighbours[i].size() << endl;
+		//if (verticeNeighbours[i].size() > 40)
+			//cout << "ojdå: " << verticeNeighbours[i].size() << endl;
+			averageConnectivity += verticeNeighbours[i].size();
 	}
+	averageConnectivity /= verticeNeighbours.size();
+	cout << "Average connectivity: " << averageConnectivity << endl;*/
 
-	//for (int i = 0; i < verticeNeighbours.size(); i++)
-		//if (verticeNeighbours[i].empty())
-			//cout << "whops. ";
 
-	/*for (int i = 0; i < verticeNeighbours.size(); i++)
-	{
-		cout << "Vertex " << i << ":";
-		for (set<int>::iterator it = verticeNeighbours[i].begin(); it != verticeNeighbours[i].end(); it++)
-		{
-			cout << *it << ", ";
-
-		}
-		cout << endl;
-	}*/
 
 	nShells = 0;
 	set<int> verticesLeft;
@@ -717,10 +536,15 @@ int MarchingCubes::computeNumberOfShells()
 		nShells++;
 		
 		// Gives the vertex a red color if it's not in the first shell.
-		glm::vec3 vertexColor = glm::vec3(0.8f, 0.8f, 0.8f);
+		glm::vec3 vertexColor = glm::vec3(1, 1, 1);
+		//glm::vec3 vertexColor = glm::vec3(0.8f, 0.8f, 0.8f);
 		if (nShells > 1)
 		{
-			vertexColor = glm::vec3(1.0f, 0.0f, 0.0f);
+			float col1 = ((double)rand() / (RAND_MAX));
+			float col2 = ((double)rand() / (RAND_MAX));
+			float col3 = ((double)rand() / (RAND_MAX));
+			vertexColor = glm::vec3(col1, col2, col3);
+			//vertexColor = glm::vec3(1.0f, 0.0f, 0.0f);
 		}
 		
 		// Create a set for the current shell and add a vertex to it.
@@ -730,8 +554,12 @@ int MarchingCubes::computeNumberOfShells()
 		// Remove the vertex from verticesLeft.
 		verticesLeft.erase(startingVertex);
 
+		int verticesInCurrentShell = 0;
+
 		while (!currentShell.empty())
 		{
+			verticesInCurrentShell++;
+
 			// Get the first vertex
 			int vertex = *currentShell.begin();
 			vboArray[vertex * 3 + 2] = vertexColor;
@@ -750,13 +578,25 @@ int MarchingCubes::computeNumberOfShells()
 			}
 			// Remove current vertex from currentShell.
 			currentShell.erase(currentShell.begin());
-		}	
+		}
+		// If the current shell has less than 1% of the total number of vertices in it, discard it as a shell.
+		if (verticesInCurrentShell < (float)vertices.size() / 100.0f)
+			nShells--;
 	}
 
-	cout << "Number of shells: " << nShells << endl;
 
 }
 
+void MarchingCubes::computeEdges()
+{
+	// Add a pair with the vertex indices for two connected vertices, sorted (to not create duplicates).
+	for (int i = 0; i < indices.size(); i++)
+	{
+		edges.insert(make_pair(min(indices[i].x, indices[i].y), max(indices[i].x, indices[i].y)));
+		edges.insert(make_pair(min(indices[i].x, indices[i].z), max(indices[i].x, indices[i].z)));
+		edges.insert(make_pair(min(indices[i].y, indices[i].z), max(indices[i].y, indices[i].z)));
+	}
+}
 
 void MarchingCubes::draw(GLuint shaderProgramID, GLuint diffuseTexID, GLuint specularTexID)
 {
