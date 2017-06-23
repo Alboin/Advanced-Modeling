@@ -1,0 +1,90 @@
+﻿  Building.cpp
+c:\users\albin\documents\github\advanced-modeling\lab 5.1\am5\am5\Building.h(60): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+c:\users\albin\documents\github\advanced-modeling\lab 5.1\am5\am5\Building.h(64): warning C4244: 'return': conversion from 'double' to 'float', possible loss of data
+Building.cpp(155): warning C4018: '<': signed/unsigned mismatch
+Building.cpp(201): warning C4018: '<': signed/unsigned mismatch
+Building.cpp(212): warning C4018: '<=': signed/unsigned mismatch
+Building.cpp(221): warning C4244: '=': conversion from 'const double' to 'float', possible loss of data
+Building.cpp(223): warning C4244: '=': conversion from 'const double' to 'float', possible loss of data
+Building.cpp(264): warning C4018: '<=': signed/unsigned mismatch
+Building.cpp(273): warning C4244: '=': conversion from 'const double' to 'float', possible loss of data
+Building.cpp(275): warning C4244: '=': conversion from 'const double' to 'float', possible loss of data
+Building.cpp(280): warning C4018: '<': signed/unsigned mismatch
+Building.cpp(296): warning C4018: '<': signed/unsigned mismatch
+Building.cpp(337): warning C4018: '<': signed/unsigned mismatch
+Building.cpp(406): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+Building.cpp(410): warning C4018: '<': signed/unsigned mismatch
+Building.cpp(424): warning C4018: '<': signed/unsigned mismatch
+Building.cpp(425): warning C4244: '+=': conversion from 'double' to 'float', possible loss of data
+Building.cpp(431): warning C4018: '<': signed/unsigned mismatch
+Building.cpp(432): warning C4244: '-=': conversion from 'double' to 'int', possible loss of data
+Building.cpp(434): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+Building.cpp(439): warning C4018: '<': signed/unsigned mismatch
+Building.cpp(450): warning C4018: '<': signed/unsigned mismatch
+Building.cpp(454): warning C4244: '+=': conversion from 'double' to 'float', possible loss of data
+Building.cpp(468): warning C4305: 'argument': truncation from 'double' to 'const float'
+Building.cpp(475): warning C4305: 'argument': truncation from 'double' to 'const float'
+Building.cpp(481): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
+Building.cpp(499): warning C4305: 'argument': truncation from 'double' to 'const float'
+Building.cpp(503): warning C4305: 'argument': truncation from 'double' to 'const float'
+Building.cpp(518): warning C4305: 'argument': truncation from 'double' to 'const float'
+Building.cpp(523): warning C4305: 'argument': truncation from 'double' to 'const float'
+Building.cpp(531): warning C4305: 'argument': truncation from 'double' to 'const float'
+Building.cpp(559): warning C4305: 'argument': truncation from 'double' to 'const float'
+Building.cpp(580): warning C4305: 'argument': truncation from 'double' to 'const float'
+Building.cpp(599): warning C4305: 'argument': truncation from 'double' to 'const float'
+Building.cpp(604): warning C4305: 'argument': truncation from 'double' to 'const float'
+Building.cpp(608): warning C4305: 'argument': truncation from 'double' to 'const float'
+Building.cpp(676): warning C4305: 'argument': truncation from 'double' to 'const float'
+  Shape.cpp
+Shape.cpp(82): warning C4305: 'argument': truncation from 'double' to 'float'
+Shape.cpp(89): warning C4305: 'argument': truncation from 'double' to 'float'
+Shape.cpp(96): warning C4305: 'argument': truncation from 'double' to 'float'
+Shape.cpp(103): warning C4305: 'argument': truncation from 'double' to 'float'
+Shape.cpp(110): warning C4305: 'argument': truncation from 'double' to 'float'
+Shape.cpp(146): warning C4018: '<': signed/unsigned mismatch
+Shape.cpp(176): warning C4018: '<': signed/unsigned mismatch
+Shape.cpp(238): warning C4018: '<': signed/unsigned mismatch
+Shape.cpp(249): warning C4018: '<': signed/unsigned mismatch
+Shape.cpp(259): warning C4018: '<': signed/unsigned mismatch
+Shape.cpp(266): warning C4018: '<': signed/unsigned mismatch
+  main.cpp
+c:\users\albin\documents\github\advanced-modeling\lab 5.1\am5\am5\Building.h(60): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+c:\users\albin\documents\github\advanced-modeling\lab 5.1\am5\am5\Building.h(64): warning C4244: 'return': conversion from 'double' to 'float', possible loss of data
+main.cpp(319): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+LINK : warning LNK4098: defaultlib 'LIBCMT' conflicts with use of other libs; use /NODEFAULTLIB:library
+LINK : warning LNK4098: defaultlib 'MSVCRTD' conflicts with use of other libs; use /NODEFAULTLIB:library
+  Generating code
+  0 of 1661 functions ( 0.0%) were compiled, the rest were copied from previous compilation.
+    0 functions were new in current compilation
+    7 functions had inline decision re-evaluated but remain unchanged
+  Finished generating code
+shaderLoader.obj : warning LNK4049: locally defined symbol ___glewLinkProgram imported
+shaderLoader.obj : warning LNK4049: locally defined symbol ___glewDeleteShader imported
+shaderLoader.obj : warning LNK4049: locally defined symbol ___glewGetProgramInfoLog imported
+shaderLoader.obj : warning LNK4049: locally defined symbol ___glewDetachShader imported
+shaderLoader.obj : warning LNK4049: locally defined symbol ___glewShaderSource imported
+shaderLoader.obj : warning LNK4049: locally defined symbol ___glewAttachShader imported
+shaderLoader.obj : warning LNK4049: locally defined symbol ___glewGetProgramiv imported
+shaderLoader.obj : warning LNK4049: locally defined symbol ___glewGetShaderInfoLog imported
+shaderLoader.obj : warning LNK4049: locally defined symbol ___glewCreateProgram imported
+shaderLoader.obj : warning LNK4049: locally defined symbol ___glewCreateShader imported
+shaderLoader.obj : warning LNK4049: locally defined symbol ___glewCompileShader imported
+shaderLoader.obj : warning LNK4049: locally defined symbol ___glewGetShaderiv imported
+glew32s.lib(glew.obj) : warning LNK4099: PDB 'vc120.pdb' was not found with 'glew32s.lib(glew.obj)' or at 'C:\Users\Albin\Documents\GitHub\Advanced-Modeling\Lab 5.1\AM5\Release\vc120.pdb'; linking object as if no debug info
+glfw3.lib(context.obj) : warning LNK4099: PDB 'glfw.pdb' was not found with 'glfw3.lib(context.obj)' or at 'C:\Users\Albin\Documents\GitHub\Advanced-Modeling\Lab 5.1\AM5\Release\glfw.pdb'; linking object as if no debug info
+glfw3.lib(init.obj) : warning LNK4099: PDB 'glfw.pdb' was not found with 'glfw3.lib(init.obj)' or at 'C:\Users\Albin\Documents\GitHub\Advanced-Modeling\Lab 5.1\AM5\Release\glfw.pdb'; linking object as if no debug info
+glfw3.lib(input.obj) : warning LNK4099: PDB 'glfw.pdb' was not found with 'glfw3.lib(input.obj)' or at 'C:\Users\Albin\Documents\GitHub\Advanced-Modeling\Lab 5.1\AM5\Release\glfw.pdb'; linking object as if no debug info
+glfw3.lib(monitor.obj) : warning LNK4099: PDB 'glfw.pdb' was not found with 'glfw3.lib(monitor.obj)' or at 'C:\Users\Albin\Documents\GitHub\Advanced-Modeling\Lab 5.1\AM5\Release\glfw.pdb'; linking object as if no debug info
+glfw3.lib(vulkan.obj) : warning LNK4099: PDB 'glfw.pdb' was not found with 'glfw3.lib(vulkan.obj)' or at 'C:\Users\Albin\Documents\GitHub\Advanced-Modeling\Lab 5.1\AM5\Release\glfw.pdb'; linking object as if no debug info
+glfw3.lib(window.obj) : warning LNK4099: PDB 'glfw.pdb' was not found with 'glfw3.lib(window.obj)' or at 'C:\Users\Albin\Documents\GitHub\Advanced-Modeling\Lab 5.1\AM5\Release\glfw.pdb'; linking object as if no debug info
+glfw3.lib(win32_init.obj) : warning LNK4099: PDB 'glfw.pdb' was not found with 'glfw3.lib(win32_init.obj)' or at 'C:\Users\Albin\Documents\GitHub\Advanced-Modeling\Lab 5.1\AM5\Release\glfw.pdb'; linking object as if no debug info
+glfw3.lib(win32_joystick.obj) : warning LNK4099: PDB 'glfw.pdb' was not found with 'glfw3.lib(win32_joystick.obj)' or at 'C:\Users\Albin\Documents\GitHub\Advanced-Modeling\Lab 5.1\AM5\Release\glfw.pdb'; linking object as if no debug info
+glfw3.lib(win32_monitor.obj) : warning LNK4099: PDB 'glfw.pdb' was not found with 'glfw3.lib(win32_monitor.obj)' or at 'C:\Users\Albin\Documents\GitHub\Advanced-Modeling\Lab 5.1\AM5\Release\glfw.pdb'; linking object as if no debug info
+glfw3.lib(win32_time.obj) : warning LNK4099: PDB 'glfw.pdb' was not found with 'glfw3.lib(win32_time.obj)' or at 'C:\Users\Albin\Documents\GitHub\Advanced-Modeling\Lab 5.1\AM5\Release\glfw.pdb'; linking object as if no debug info
+glfw3.lib(win32_tls.obj) : warning LNK4099: PDB 'glfw.pdb' was not found with 'glfw3.lib(win32_tls.obj)' or at 'C:\Users\Albin\Documents\GitHub\Advanced-Modeling\Lab 5.1\AM5\Release\glfw.pdb'; linking object as if no debug info
+glfw3.lib(win32_window.obj) : warning LNK4099: PDB 'glfw.pdb' was not found with 'glfw3.lib(win32_window.obj)' or at 'C:\Users\Albin\Documents\GitHub\Advanced-Modeling\Lab 5.1\AM5\Release\glfw.pdb'; linking object as if no debug info
+glfw3.lib(wgl_context.obj) : warning LNK4099: PDB 'glfw.pdb' was not found with 'glfw3.lib(wgl_context.obj)' or at 'C:\Users\Albin\Documents\GitHub\Advanced-Modeling\Lab 5.1\AM5\Release\glfw.pdb'; linking object as if no debug info
+glfw3.lib(egl_context.obj) : warning LNK4099: PDB 'glfw.pdb' was not found with 'glfw3.lib(egl_context.obj)' or at 'C:\Users\Albin\Documents\GitHub\Advanced-Modeling\Lab 5.1\AM5\Release\glfw.pdb'; linking object as if no debug info
+  AM5.vcxproj -> C:\Users\Albin\Documents\GitHub\Advanced-Modeling\Lab 5.1\AM5\Release\AM5.exe
+  AM5.vcxproj -> C:\Users\Albin\Documents\GitHub\Advanced-Modeling\Lab 5.1\AM5\Release\AM5.pdb (Full PDB)

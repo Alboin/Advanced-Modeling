@@ -27,12 +27,14 @@ glm::mat4 view;
 glm::mat4 model = mat4(1.0f);
 glm::mat4 projection;
 GLuint shaderProgramID;
+GLuint axesShaderID;
 
 // Global variables for controls
 bool leftMousePressed = false;
 double mouseX, mouseY;
 int wireframe = 0;
 bool exitProgram = false;
+bool axesEnabled = true;
 
 // Global variables for the fps-counter
 double t0 = 0.0;
@@ -45,8 +47,9 @@ void key_callback(GLFWwindow* window, int key, int scancode, int action, int mod
 static void cursor_position_callback(GLFWwindow* window, double xpos, double ypos);
 void mouse_button_callback(GLFWwindow* window, int button, int action, int mods);
 void scroll_callback(GLFWwindow* window, double xoffset, double yoffset);
+void createAxesVBO(GLuint &VAO, GLuint &VBO, GLuint &EBO, vector<vec3> &vboArray, vector<ivec3> &indices);
+void drawAxes(GLuint VBO, GLuint VAO, vector<vec3> vboArray, vector<ivec3> indices);
 void updateMeshUniforms();
-
 
 int main()
 {
@@ -95,6 +98,7 @@ int main()
 
 	// Create and compile the GLSL program from the shaders
 	shaderProgramID = LoadShaders("vertexshader.glsl", "fragmentshader.glsl");
+	axesShaderID = LoadShaders("axesVertex.glsl", "axesFragment.glsl");
 
 	//Register external intpu in GLFW
 	glfwSetKeyCallback(window, key_callback);
@@ -110,6 +114,23 @@ int main()
 	glEnable(GL_DEPTH_TEST);
 	glPointSize(5);
 
+	// Create coordinate axes in origo.
+	vector<vec3> axesVBO;
+	axesVBO.push_back(vec3(0, 0, 0));
+	for (int i = 0; i < 3; i++)
+		axesVBO.push_back(vec3(1, 0, 0));
+	axesVBO.push_back(vec3(0, 0, 0));
+	for (int i = 0; i < 3; i++)
+		axesVBO.push_back(vec3(0, 1, 0));
+	axesVBO.push_back(vec3(0, 0, 0));
+	for (int i = 0; i < 3; i++)
+		axesVBO.push_back(vec3(0, 0, 1));
+
+	vector<ivec3> indicesAxes = { ivec3(0,1,0), ivec3(2,3,2), ivec3(4,5,4) };
+
+	GLuint VAO, VBO, EBO;
+	createAxesVBO(VAO, VBO, EBO, axesVBO, indicesAxes);
+
 
 	while (!glfwWindowShouldClose(window) && !exitProgram)
 	{
@@ -119,6 +140,16 @@ int main()
 		glfwGetCursorPos(window, &mouseX, &mouseY);
 
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+
+		// Render coordinate axes at origo.
+		if (axesEnabled)
+		{
+			glUseProgram(axesShaderID);
+			updateMeshUniforms();
+			drawAxes(VBO, VAO, axesVBO, indicesAxes);
+			glUseProgram(shaderProgramID);
+		}
+
 
 		if (wireframe == 0)
 			glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
@@ -156,6 +187,46 @@ int main()
 	return 0;
 }
 
+void createAxesVBO(GLuint &VAO, GLuint &VBO, GLuint &EBO, vector<vec3> &vboArray, vector<ivec3> &indices)
+{
+	glGenVertexArrays(1, &VAO);
+	glGenBuffers(1, &VBO);
+	glGenBuffers(1, &EBO);
+
+	glBindVertexArray(VAO);
+
+	glBindBuffer(GL_ARRAY_BUFFER, VBO);
+	glBufferData(GL_ARRAY_BUFFER, sizeof(vec3)*vboArray.size(), &vboArray[0], GL_STATIC_DRAW);
+
+	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, EBO);
+	glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(ivec3)*indices.size(), &indices[0], GL_STATIC_DRAW);
+
+	//Vertex position attribute	
+	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 2 * sizeof(vec3), (GLvoid*)0);
+	glEnableVertexAttribArray(0);
+	//Vertex color coordinate
+	glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 2 * sizeof(vec3), (GLvoid*)(sizeof(vec3)));
+	glEnableVertexAttribArray(1);
+
+	glBindBuffer(GL_ARRAY_BUFFER, 0);
+	glBindVertexArray(0);
+}
+
+void drawAxes(GLuint VBO, GLuint VAO, vector<vec3> vboArray, vector<ivec3> indices)
+{
+	//glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
+	glLineWidth(5);
+
+	glBindBuffer(GL_ARRAY_BUFFER, VBO);
+	glBufferData(GL_ARRAY_BUFFER, sizeof(vec3)*vboArray.size(), &vboArray[0], GL_STATIC_DRAW);
+
+	glBindVertexArray(VAO);
+
+	glDrawElements(GL_LINES, sizeof(ivec3)*indices.size(), GL_UNSIGNED_INT, 0);
+	glBindVertexArray(0);
+	glLineWidth(1);
+}
+
 
 void updateMeshUniforms()
 {
@@ -180,6 +251,14 @@ void key_callback(GLFWwindow* window, int key, int scancode, int action, int mod
 		wireframe++;
 		if (wireframe == 3)
 			wireframe = 0;
+	}
+
+	if (key == GLFW_KEY_X && action == GLFW_PRESS)
+	{
+		if (axesEnabled)
+			axesEnabled = false;
+		else
+			axesEnabled = true;
 	}
 
 	if (key == GLFW_KEY_ESCAPE && action == GLFW_PRESS)

@@ -1,20 +1,39 @@
 ﻿C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V140\Microsoft.CppBuild.targets(392,5): warning MSB8028: The intermediate directory (Release\) contains files shared from another project (FRR.vcxproj, RRMM.vcxproj).  This can lead to incorrect clean and rebuild behavior.
   Building.cpp
-Building.cpp(49): warning C4018: '<': signed/unsigned mismatch
-Building.cpp(80): warning C4018: '<': signed/unsigned mismatch
-Building.cpp(111): warning C4018: '<': signed/unsigned mismatch
+Building.cpp(92): warning C4305: 'argument': truncation from 'double' to 'float'
+Building.cpp(102): warning C4018: '<': signed/unsigned mismatch
+Building.cpp(129): warning C4018: '<': signed/unsigned mismatch
 Building.cpp(190): warning C4018: '<': signed/unsigned mismatch
-Building.cpp(220): warning C4018: '<': signed/unsigned mismatch
-Building.cpp(286): warning C4018: '<': signed/unsigned mismatch
-Building.cpp(293): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
-Building.cpp(298): warning C4018: '<': signed/unsigned mismatch
-Building.cpp(301): warning C4018: '<': signed/unsigned mismatch
+Building.cpp(207): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+Building.cpp(214): warning C4018: '<': signed/unsigned mismatch
+Building.cpp(218): warning C4018: '<': signed/unsigned mismatch
+Building.cpp(227): warning C4018: '<': signed/unsigned mismatch
+Building.cpp(229): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+Building.cpp(239): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+Building.cpp(240): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+Building.cpp(242): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+Building.cpp(243): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+Building.cpp(245): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+Building.cpp(289): warning C4018: '<=': signed/unsigned mismatch
+Building.cpp(305): warning C4018: '<': signed/unsigned mismatch
+Building.cpp(321): warning C4018: '<': signed/unsigned mismatch
+Building.cpp(352): warning C4018: '<=': signed/unsigned mismatch
+Building.cpp(388): warning C4018: '<': signed/unsigned mismatch
+Building.cpp(449): warning C4018: '<': signed/unsigned mismatch
+Building.cpp(510): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+Building.cpp(514): warning C4018: '<': signed/unsigned mismatch
+Building.cpp(528): warning C4018: '<': signed/unsigned mismatch
+Building.cpp(535): warning C4018: '<': signed/unsigned mismatch
+Building.cpp(536): warning C4244: '-=': conversion from 'float' to 'int', possible loss of data
+Building.cpp(538): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+Building.cpp(543): warning C4018: '<': signed/unsigned mismatch
+Building.cpp(554): warning C4018: '<': signed/unsigned mismatch
 LINK : warning LNK4098: defaultlib 'LIBCMT' conflicts with use of other libs; use /NODEFAULTLIB:library
 LINK : warning LNK4098: defaultlib 'MSVCRTD' conflicts with use of other libs; use /NODEFAULTLIB:library
   Generating code
-  14 of 972 functions ( 1.4%) were compiled, the rest were copied from previous compilation.
-    5 functions were new in current compilation
-    26 functions had inline decision re-evaluated but remain unchanged
+  2 of 1355 functions ( 0.1%) were compiled, the rest were copied from previous compilation.
+    0 functions were new in current compilation
+    29 functions had inline decision re-evaluated but remain unchanged
   Finished generating code
 shaderLoader.obj : warning LNK4049: locally defined symbol ___glewLinkProgram imported
 shaderLoader.obj : warning LNK4049: locally defined symbol ___glewDeleteShader imported

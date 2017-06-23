@@ -17,22 +17,20 @@ class Building
 {
 public:
 	Building(string inputFile);
-	Building() {}; //Default constructor.
 	void drawBuilding(const GLuint shaderProgramID) const;
-private:
-	vector<vector<vec3>> vboArray;
-	vector<vector<ivec3>> indices;
-	vector<GLuint> textures;
-	vector<GLuint> VBO, VAO, EBO;
 
-	void createVBO();
+private:
+
+	vector<Shape> allShapes;
+	vector<GLuint> textures;
+
 	void loadTextures(vector<string> textureLocations);
-	void parseFile(string fileName);
-	pair<vector<vec3>, vector<ivec3> > generateCube(float x, float y, float z) const;
-	pair<vector<vec3>, vector<ivec3> > generateCylinder(float x, float y, float z) const;
-	pair<vector<vec3>, vector<ivec3> > generateConeRoof(float x, float y, float z) const;
-	pair<vector<vec3>, vector<ivec3> > generateSquareRoof(float x, float y, float z) const;
-	pair<vector<vec3>, vector<ivec3> > generatePyramidRoof(float x, float y, float z) const;
-	vector<vec3> translateVertices(vector<vec3> &vertices, vec3 translation);
-	void addNewShape(vector<vec3> newVertices, vector<ivec3> newIndices);
+
+	vector<int> subdivide(const char &axis, Shape &shape, const vector<float> ratios, const vector<string> typeNames);
+	vector<int> subdivide2(const char &axis, const Shape shape, const vector<float> ratios);
+	vector<int> subdivideFace(const char &axis, const Shape shape, const vector<float> ratios);
+	vector<int> subDivideCylinderHorizontal(const Shape shape, const vector<float> ratios, const vector<string> typeNames);
+	vector<int> separateFaces(Shape &shape, const string &typeName);
+	vector<int> extrudeFace(Shape &shape, float extrude);
+	vector<float> createRatios(const char &axis, vector<float> input, const Shape &shape);
 };

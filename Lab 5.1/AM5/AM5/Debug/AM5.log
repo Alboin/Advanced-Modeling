@@ -1,0 +1,39 @@
+﻿  Building.cpp
+c:\users\albin\documents\github\advanced-modeling\lab 5.1\am5\am5\building.h(59): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+c:\users\albin\documents\github\advanced-modeling\lab 5.1\am5\am5\building.h(63): warning C4244: 'return': conversion from 'double' to 'float', possible loss of data
+c:\users\albin\documents\github\advanced-modeling\lab 5.1\am5\am5\building.cpp(81): warning C4305: 'argument': truncation from 'double' to 'const float'
+c:\users\albin\documents\github\advanced-modeling\lab 5.1\am5\am5\building.cpp(102): warning C4305: 'argument': truncation from 'double' to 'const float'
+c:\users\albin\documents\github\advanced-modeling\lab 5.1\am5\am5\building.cpp(121): warning C4305: 'argument': truncation from 'double' to 'const float'
+c:\users\albin\documents\github\advanced-modeling\lab 5.1\am5\am5\building.cpp(126): warning C4305: 'argument': truncation from 'double' to 'const float'
+c:\users\albin\documents\github\advanced-modeling\lab 5.1\am5\am5\building.cpp(130): warning C4305: 'argument': truncation from 'double' to 'const float'
+c:\users\albin\documents\github\advanced-modeling\lab 5.1\am5\am5\building.cpp(222): warning C4018: '<': signed/unsigned mismatch
+c:\users\albin\documents\github\advanced-modeling\lab 5.1\am5\am5\building.cpp(268): warning C4018: '<': signed/unsigned mismatch
+c:\users\albin\documents\github\advanced-modeling\lab 5.1\am5\am5\building.cpp(279): warning C4018: '<=': signed/unsigned mismatch
+c:\users\albin\documents\github\advanced-modeling\lab 5.1\am5\am5\building.cpp(288): warning C4244: '=': conversion from 'const double' to 'float', possible loss of data
+c:\users\albin\documents\github\advanced-modeling\lab 5.1\am5\am5\building.cpp(290): warning C4244: '=': conversion from 'const double' to 'float', possible loss of data
+c:\users\albin\documents\github\advanced-modeling\lab 5.1\am5\am5\building.cpp(331): warning C4018: '<=': signed/unsigned mismatch
+c:\users\albin\documents\github\advanced-modeling\lab 5.1\am5\am5\building.cpp(340): warning C4244: '=': conversion from 'const double' to 'float', possible loss of data
+c:\users\albin\documents\github\advanced-modeling\lab 5.1\am5\am5\building.cpp(342): warning C4244: '=': conversion from 'const double' to 'float', possible loss of data
+c:\users\albin\documents\github\advanced-modeling\lab 5.1\am5\am5\building.cpp(347): warning C4018: '<': signed/unsigned mismatch
+c:\users\albin\documents\github\advanced-modeling\lab 5.1\am5\am5\building.cpp(363): warning C4018: '<': signed/unsigned mismatch
+c:\users\albin\documents\github\advanced-modeling\lab 5.1\am5\am5\building.cpp(404): warning C4018: '<': signed/unsigned mismatch
+c:\users\albin\documents\github\advanced-modeling\lab 5.1\am5\am5\building.cpp(473): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+c:\users\albin\documents\github\advanced-modeling\lab 5.1\am5\am5\building.cpp(477): warning C4018: '<': signed/unsigned mismatch
+c:\users\albin\documents\github\advanced-modeling\lab 5.1\am5\am5\building.cpp(491): warning C4018: '<': signed/unsigned mismatch
+c:\users\albin\documents\github\advanced-modeling\lab 5.1\am5\am5\building.cpp(492): warning C4244: '+=': conversion from 'double' to 'float', possible loss of data
+c:\users\albin\documents\github\advanced-modeling\lab 5.1\am5\am5\building.cpp(498): warning C4018: '<': signed/unsigned mismatch
+c:\users\albin\documents\github\advanced-modeling\lab 5.1\am5\am5\building.cpp(499): warning C4244: '-=': conversion from 'double' to 'int', possible loss of data
+c:\users\albin\documents\github\advanced-modeling\lab 5.1\am5\am5\building.cpp(501): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+c:\users\albin\documents\github\advanced-modeling\lab 5.1\am5\am5\building.cpp(506): warning C4018: '<': signed/unsigned mismatch
+c:\users\albin\documents\github\advanced-modeling\lab 5.1\am5\am5\building.cpp(517): warning C4018: '<': signed/unsigned mismatch
+c:\users\albin\documents\github\advanced-modeling\lab 5.1\am5\am5\building.cpp(521): warning C4244: '+=': conversion from 'double' to 'float', possible loss of data
+c:\users\albin\documents\github\advanced-modeling\lab 5.1\am5\am5\building.cpp(535): warning C4305: 'argument': truncation from 'double' to 'const float'
+c:\users\albin\documents\github\advanced-modeling\lab 5.1\am5\am5\building.cpp(542): warning C4305: 'argument': truncation from 'double' to 'const float'
+c:\users\albin\documents\github\advanced-modeling\lab 5.1\am5\am5\building.cpp(548): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
+c:\users\albin\documents\github\advanced-modeling\lab 5.1\am5\am5\building.cpp(566): warning C4305: 'argument': truncation from 'double' to 'const float'
+c:\users\albin\documents\github\advanced-modeling\lab 5.1\am5\am5\building.cpp(570): warning C4305: 'argument': truncation from 'double' to 'const float'
+c:\users\albin\documents\github\advanced-modeling\lab 5.1\am5\am5\building.cpp(585): warning C4305: 'argument': truncation from 'double' to 'const float'
+c:\users\albin\documents\github\advanced-modeling\lab 5.1\am5\am5\building.cpp(590): warning C4305: 'argument': truncation from 'double' to 'const float'
+c:\users\albin\documents\github\advanced-modeling\lab 5.1\am5\am5\building.cpp(598): warning C4305: 'argument': truncation from 'double' to 'const float'
+  AM5.vcxproj -> C:\Users\Albin\Documents\GitHub\Advanced-Modeling\Lab 5.1\AM5\Debug\AM5.exe
+  AM5.vcxproj -> C:\Users\Albin\Documents\GitHub\Advanced-Modeling\Lab 5.1\AM5\Debug\AM5.pdb (Partial PDB)
